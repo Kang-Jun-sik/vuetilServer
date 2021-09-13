@@ -45,7 +45,7 @@ app.use('/', auth);
 app.use('/posts', authenticateUser, posts);
 
 // api docs
-// app.use('/api', docs);
+app.use('/api', docs);
 
 // start
 app.listen(port, () =>
