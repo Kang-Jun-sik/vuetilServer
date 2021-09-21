@@ -44,8 +44,8 @@ app.use(morgan('dev')); // log request
 
 // express routers
 app.use('/', auth);
-app.use('/static', express.static('public'));
-//app.use(express.static('public'));
+//app.use('/static', express.static('public'));
+app.use(express.static('./public'));
 
 app.use('/posts', authenticateUser, posts);
 
