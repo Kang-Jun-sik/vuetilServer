@@ -43,8 +43,8 @@ app.use(bodyParser.json());
 app.use(morgan('dev')); // log request
 
 // express routers
-//app.use('/', auth);
-app.use('/', express.static( 'public'));
+app.use('/', auth);
+app.use(express.static('public'));
 app.use('/posts', authenticateUser, posts);
 
 // api docs
