@@ -13,16 +13,16 @@ import posts from './api/posts.js';
 import docs from './utils/api-doc.js';
 
 // utils
-import {authenticateUser} from './utils/auth.js';
+import { authenticateUser } from './utils/auth.js';
 
 // mongo db
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 mongoose.connect(
-    'mongodb+srv://test:1234@cluster0.r7hle.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-    {
-        useNewUrlParser: true,
-    },
+  'mongodb+srv://test:1234@cluster0.r7hle.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+  },
 );
 mongoose.Promise = global.Promise;
 
@@ -30,7 +30,7 @@ mongoose.Promise = global.Promise;
 let port;
 
 async function configServer() {
-    port = 3000 || (await detectPort(3000));
+  port = 3000 || (await detectPort(3000));
 }
 
 configServer();
@@ -38,15 +38,12 @@ configServer();
 // express setup
 const app = express();
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan('dev')); // log request
 
 // express routers
 app.use('/', auth);
-//app.use('/static', express.static('public'));
-app.use(express.static('./public'));
-
 app.use('/posts', authenticateUser, posts);
 
 // api docs
@@ -54,9 +51,9 @@ app.use('/api', docs);
 
 // start
 app.listen(port, () =>
-    console.log(
-        `${chalk.white
-            .bgHex('#41b883')
-            .bold(`VUE TIL SERVER IS RUNNING ON ${port}`)}`,
-    ),
+  console.log(
+    `${chalk.white
+      .bgHex('#41b883')
+      .bold(`VUE TIL SERVER IS RUNNING ON ${port}`)}`,
+  ),
 );
